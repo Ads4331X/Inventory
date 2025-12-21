@@ -1,39 +1,39 @@
 #include <iostream>
-
-using namespace std;
+#include "product.h"
 
 int main()
 {
-    string itemName;
+    std::string itemName;
     int id;
     char choice;
+    Product P;
+
     do
     {
 
-        cout << "Enter your choice: ";
-        cin >> choice;
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
 
         switch (choice)
         {
         case '1':
         {
-            // Add item logic
-            cout << "Enter item name: ";
-            getline(cin >> ws, itemName);
-            cout << "Enter item ID: ";
-            cin >> id;
-            cout << "Item added successfully!" << endl;
+            P.addItem();
             break;
         }
         case '2':
             // Edit item logic
-            int editId;
-            cout << "Enter item ID to edit: ";
-            cin >> editId;
+            std::cout << "Enter the item ID to edit: ";
+            std::cin >> id;
 
+            P.editItem(id);
             break;
         case '3':
             // Delete item logic
+            std::cout << "Enter the item ID to delete: ";
+            std::cin >> id;
+
+            P.deleteItem(id);
             break;
         case '4':
             // View items logic
@@ -42,11 +42,11 @@ int main()
         case '6':
         case 'q':
         case 'Q':
-            cout << "Exiting program..." << endl;
+            std::cout << "Exiting program..." << std::endl;
             break;
 
         default:
-            cout << "Invalid choice. Please try again." << endl; // Invalid choice handling
+            std::cout << "Invalid choice. Please try again." << std::endl; // Invalid choice handling
 
             continue;
         }

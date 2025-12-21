@@ -3,6 +3,8 @@
 #include "Item.h"
 #include "config.h"
 #include "TimeUtils.h"
+#include <iomanip>
+#include <fstream>
 
 Product::Product(std::string itemName, int id, double price, int quantity, std::string description)
     : Item(itemName, id)
@@ -42,4 +44,85 @@ void Product::addItem()
     invFile.close();
 
     std::cout << "Product added successfully!" << std::endl;
+}
+
+void Product::editItem(int editId)
+{
+    invFile.open(inventoryFilename, std::ios::in | std::ios::binary);
+    tempFile.open(tempInventoryFilename, std::ios::out | std::ios::binary);
+    if (!invFile || !tempFile)
+    {
+        std::cerr << "Error opening files for editing item!" << std::endl;
+        return;
+    }
+    while (invFile.read((char *)&*this, sizeof(Product)))
+    {
+        if (_id == editId)
+        {
+            std::string newName;
+            int newId;
+            std::cout << "Enter new item name: ";
+            std::getline(std::cin >> std::ws, newName);
+            std::cout << "Enter new item ID: ";
+            std::cin >> newId;
+            std::cout << "Enter new item price: ";
+            std::cin >> _price;
+            std::cout << "Enter new item quantity: ";
+            std::cin >> _quantity;
+            std::cout << "Enter new item description: ";
+            std::cin.ignore();
+            std::cin.getline(_description, 100);
+            strncpy(_itemName, newName.c_str(), sizeof(_itemName));
+            _itemName[sizeof(_itemName) - 1] = '\0'; // ensure null-terminated
+            _id = newId;
+        }
+        tempFile.write((char *)&*this, sizeof(Product));
+    }
+    // closing files
+    invFile.close();
+    tempFile.close();
+
+    remove(inventoryFilename.c_str());                                // remove old file
+    rename(tempInventoryFilename.c_str(), inventoryFilename.c_str()); // rename files
+
+    std::cout << "Product edited successfully!" << std::endl; // success message
+}
+
+void Product::deleteItem(int deleteId)
+{
+    invFile.open(inventoryFilename, std::ios::in | std::ios::binary);
+    tempFile.open(tempInventoryFilename, std::ios::out | std::ios::binary);
+    historyFile.open(historyFilename, std::ios::app | std::ios::binary);
+    if (!invFile || !tempFile || !historyFile)
+    {
+        std::cerr << "Error opening files for deleting item!" << std::endl;
+        return;
+    }
+    while (invFile.read((char *)&*this, sizeof(Product)))
+    {
+        if (_id == deleteId)
+        {
+
+            // Log deleted item to history
+            historyFile.write((char *)&*this, sizeof(Product));
+            std::cout << "Item deleted successfully!" << std::endl;
+            continue; // Skip writing to temp file
+        }
+        tempFile.write((char *)&*this, sizeof(Product));
+    }
+
+    // closing files
+    invFile.close();
+    tempFile.close();
+    historyFile.close();
+
+    remove(inventoryFilename.c_str());                                // remove old file
+    rename(tempInventoryFilename.c_str(), inventoryFilename.c_str()); // rename files
+
+    std::cout << "Product deleted successfully!" << std::endl; // success message
+}
+
+void Product::display()
+{
+    std::cout << "Item ID: " << _id << ", Item Name: " << _itemName << ", Price: " << _price << ", Quantity: " << _quantity << ", Description: " << _description << ", Added Date: " << _addedDateTime << std::endl;
 }

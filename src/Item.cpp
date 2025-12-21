@@ -8,7 +8,7 @@ Item::Item(std::string itemName = "", int id = 0)
     _itemName[sizeof(_itemName) - 1] = '\0'; // ensure null-terminated
     _id = id;
     strncpy(_addedDateTime, getCurrentDateTime().c_str(), sizeof(_addedDateTime));
-    _addedDateTime[sizeof(_addedDateTime) - 1] = '\0'; // ensure null-terminated
+    _addedDateTime[sizeof(_addedDateTime) - 1] = '\0';
 }
 
 void Item::addItem()
@@ -92,7 +92,22 @@ void Item::deleteItem(int deleteId)
     rename(tempInventoryFilename.c_str(), inventoryFilename.c_str()); // rename files
 }
 
-void Item::display() const
+void Item::display()
 {
     std::cout << "Item ID: " << _id << ", Item Name: " << _itemName << "Added Date: " << _addedDateTime << std::endl;
+}
+
+void Item::viewInv()
+{
+    invFile.open(inventoryFilename, std::ios::in | std::ios::binary);
+    if (!invFile)
+    {
+        std::cerr << "Error opening file for viewing inventory!" << std::endl;
+        return;
+    }
+    while (invFile.read((char *)&*this, sizeof(*this)))
+    {
+        display();
+    }
+    invFile.close();
 }

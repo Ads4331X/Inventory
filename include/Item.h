@@ -20,7 +20,8 @@ public:
     void addItem();
     void editItem(int editId);
     void deleteItem(int deleteId);
-    virtual void display() const = 0;
+    void viewInv();
+    virtual void display() = 0;
 };
 
 #endif

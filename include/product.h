@@ -15,7 +15,7 @@ public:
     void addItem();
     void editItem(int editId);
     void deleteItem(int deleteId);
-    void display() const;
+    void display();
 };
 
 #endif
