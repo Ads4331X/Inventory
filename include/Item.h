@@ -10,7 +10,7 @@
 
 class Item
 {
-private:
+protected:
     char _itemName[50];
     int _id;
     char _addedDateTime[20];
