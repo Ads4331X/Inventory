@@ -1,5 +1,6 @@
 #include <iostream>
 #include "product.h"
+#include "showMenu.h"
 
 int main()
 {
@@ -10,9 +11,9 @@ int main()
     do
     {
 
-        std::cout << "Enter your choice: ";
-        std::cin >> choice;
-
+        choice = showMenu();
+        if (choice == '\0')
+            continue;
         switch (choice)
         {
         case '1':

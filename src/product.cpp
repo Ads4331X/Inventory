@@ -180,7 +180,7 @@ void Product::delItem()
     }
 
     std::cout << "--------------------------------------------------------------------------------------------\n";
-    invFile.close();
+    historyFile.close();
 }
 
 void Product::display()
