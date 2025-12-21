@@ -23,7 +23,7 @@ int main()
             break;
         }
         case '2':
-            // Edit item logic
+        { // Edit item logic
             std::cout << "Enter the item ID to edit: ";
             std::cin >> id;
 
@@ -31,8 +31,9 @@ int main()
 
             P.editItem(id);
             break;
+        }
         case '3':
-            // Delete item logic
+        { // Delete item logic
             std::cout << "Enter the item ID to delete: ";
             std::cin >> id;
 
@@ -40,9 +41,15 @@ int main()
 
             P.deleteItem(id);
             break;
+        }
         case '4':
-            // View items logic
+        { // View items logic
+            Product P;
+
+            P.viewInv();
+
             break;
+        }
 
         case '6':
         case 'q':

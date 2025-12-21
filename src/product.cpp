@@ -125,10 +125,16 @@ void Product::deleteItem(int deleteId)
 void Product::viewInv()
 {
     invFile.open(inventoryFilename, std::ios::in | std::ios::binary);
+    if (!invFile)
+    {
+        std::cerr << "Error opening file for viewing inventory!" << std::endl;
+        return;
+    }
     while (invFile.read((char *)&*this, sizeof(Product)))
     {
         display(); // to display the inventory
     }
+    invFile.close();
 }
 
 void Product::display()
