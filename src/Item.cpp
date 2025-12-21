@@ -107,7 +107,7 @@ void Item::viewInv()
     }
     while (invFile.read((char *)&*this, sizeof(*this)))
     {
-        display();
+        display(); // to display the inventory
     }
     invFile.close();
 }

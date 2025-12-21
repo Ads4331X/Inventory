@@ -6,7 +6,6 @@ int main()
     std::string itemName;
     int id;
     char choice;
-    Product P;
 
     do
     {
@@ -18,6 +17,8 @@ int main()
         {
         case '1':
         {
+            Product P;
+
             P.addItem();
             break;
         }
@@ -26,12 +27,16 @@ int main()
             std::cout << "Enter the item ID to edit: ";
             std::cin >> id;
 
+            Product P;
+
             P.editItem(id);
             break;
         case '3':
             // Delete item logic
             std::cout << "Enter the item ID to delete: ";
             std::cin >> id;
+
+            Product P;
 
             P.deleteItem(id);
             break;

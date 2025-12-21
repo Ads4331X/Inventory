@@ -122,6 +122,15 @@ void Product::deleteItem(int deleteId)
     std::cout << "Product deleted successfully!" << std::endl; // success message
 }
 
+void Product::viewInv()
+{
+    invFile.open(inventoryFilename, std::ios::in | std::ios::binary);
+    while (invFile.read((char *)&*this, sizeof(Product)))
+    {
+        display(); // to display the inventory
+    }
+}
+
 void Product::display()
 {
     std::cout << "Item ID: " << _id << ", Item Name: " << _itemName << ", Price: " << _price << ", Quantity: " << _quantity << ", Description: " << _description << ", Added Date: " << _addedDateTime << std::endl;

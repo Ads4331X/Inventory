@@ -15,6 +15,7 @@ public:
     void addItem();
     void editItem(int editId);
     void deleteItem(int deleteId);
+    void viewInv();
     void display();
 };
 
