@@ -50,6 +50,15 @@ int main()
 
             break;
         }
+        case '5':
+        {
+            // view deleted history
+            Product P;
+
+            P.delItem();
+
+            break;
+        }
 
         case '6':
         case 'q':

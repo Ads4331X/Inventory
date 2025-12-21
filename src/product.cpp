@@ -130,10 +130,56 @@ void Product::viewInv()
         std::cerr << "Error opening file for viewing inventory!" << std::endl;
         return;
     }
-    while (invFile.read((char *)&*this, sizeof(Product)))
+
+    std::cout << "--------------------------------------------------------------------------------------------\n";
+    std::cout << "| " << std::left << std::setw(25) << "Item Name"
+              << "| " << std::setw(10) << "Price"
+              << "| " << std::setw(6) << "Qty"
+              << "| " << std::setw(20) << "Added Date"
+              << "|\n";
+    std::cout << "--------------------------------------------------------------------------------------------\n";
+
+    Product temp;
+    while (invFile.read((char *)&temp, sizeof(Product)))
     {
-        display(); // to display the inventory
+        std::cout << "| " << std::left << std::setw(25) << temp._itemName
+                  << "| " << std::setw(10) << std::fixed << std::setprecision(2) << temp._price
+                  << "| " << std::setw(6) << temp._quantity
+                  << "| " << std::setw(20) << temp._addedDateTime
+                  << "|\n";
     }
+
+    std::cout << "--------------------------------------------------------------------------------------------\n";
+    invFile.close();
+}
+
+void Product::delItem()
+{
+    historyFile.open(historyFilename, std::ios::in | std::ios::binary);
+    if (!historyFile)
+    {
+        std::cerr << "Error opening file for viewing history!" << std::endl;
+        return;
+    }
+    std::cout << "--------------------------------------------------------------------------------------------\n";
+    std::cout << "| " << std::left << std::setw(25) << "Item Name"
+              << "| " << std::setw(10) << "Price"
+              << "| " << std::setw(6) << "Qty"
+              << "| " << std::setw(20) << "Added Date"
+              << "|\n";
+    std::cout << "--------------------------------------------------------------------------------------------\n";
+
+    Product temp;
+    while (historyFile.read((char *)&temp, sizeof(Product)))
+    {
+        std::cout << "| " << std::left << std::setw(25) << temp._itemName
+                  << "| " << std::setw(10) << std::fixed << std::setprecision(2) << temp._price
+                  << "| " << std::setw(6) << temp._quantity
+                  << "| " << std::setw(20) << temp._addedDateTime
+                  << "|\n";
+    }
+
+    std::cout << "--------------------------------------------------------------------------------------------\n";
     invFile.close();
 }
 

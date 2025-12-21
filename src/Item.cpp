@@ -111,3 +111,18 @@ void Item::viewInv()
     }
     invFile.close();
 }
+
+void Item::delItem()
+{
+    historyFile.open(historyFilename, std::ios::in | std::ios::binary);
+    if (!historyFile)
+    {
+        std::cerr << "Error opening file for viewing history!" << std::endl;
+        return;
+    }
+    while (historyFile.read((char *)&*this, sizeof(*this)))
+    {
+        display(); // to display the history
+    }
+    historyFile.close();
+}
