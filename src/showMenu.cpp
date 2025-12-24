@@ -17,8 +17,9 @@ char ShowMenu()
     system("clear");
 #endif
 
-    char choice;
+    char choice; // initialize a character in which takes user input
 
+    // displays the choices that the user can enter in a proper format
     std::cout << "Inventory Management System" << std::endl;
     std::cout << "------------------------------" << std::endl;
     std::cout << "1. Add Item" << std::endl;
@@ -30,14 +31,15 @@ char ShowMenu()
     std::cout << "------------------------------" << std::endl;
 
     std::cout << "Enter your choice: ";
-    std::cin >> choice;
+    std::cin >> choice;            // gets the user choice
     return validateChoice(choice); // Validate choice
 }
 
+/* function to check if the choice that user has given is valid or nor*/
 char validateChoice(char choice)
 {
-    if (choice >= '1' && choice <= '6')
-        return choice;
+    if (choice >= '1' && choice <= '6') // checks if choise lies within 1 to 6
+        return choice;                  // return the choice
 
     else
     {
