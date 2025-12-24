@@ -19,7 +19,7 @@ A C++ console-based inventory management system that allows users to manage prod
 
 ## How to Run
 
-[Add your run command here]
+run inventory.cpp
 
 ## File Structure
 
