@@ -129,7 +129,7 @@ void Item::viewInv()
 
 /* function to view the data of the deleted items
 it displays the data stored in history file which stores all the deleted item information*/
-void Item::delItem()
+void Item::viewDelItem()
 {
     historyFile.open(historyFilename, std::ios::in | std::ios::binary); // opens history file in reading in binary mode
     if (!historyFile)                                                   // checks if history file exists

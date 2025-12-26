@@ -18,10 +18,10 @@ protected:
 public:
     Item(std::string itemName = "", int id = 0);
     virtual void addItem() = 0;
-    void editItem(int editId);
-    void deleteItem(int deleteId);
+    virtual void editItem(int editId);
+    virtual void deleteItem(int deleteId);
     virtual void display();
-    void delItem();
+    virtual void viewDelItem();
     virtual void viewInv() = 0;
 };
 
