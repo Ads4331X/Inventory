@@ -31,9 +31,10 @@ int main()
             std::cout << "Enter the item ID to edit: ";
             std::cin >> id; // gets the id to edit from the user
 
-            Product P; // object of product
+            Item *P = new Product();
 
-            P.editItem(id); // edits the data from the inventory which id is same as the one given by user
+            P->editItem(id); // edits the data from the inventory which id is same as the one given by user
+            delete P;
             break;
         }
         case '3':
@@ -41,9 +42,10 @@ int main()
             std::cout << "Enter the item ID to delete: ";
             std::cin >> id; // gets the id to delete from the user
 
-            Product P; // object of product
+            Item *P = new Product();
 
-            P.deleteItem(id); // deletes the data from the inventory which id is same as the one given by user
+            P->deleteItem(id); // deletes the data from the inventory which id is same as the one given by user
+            delete P;
             break;
         }
         case '4':
@@ -57,9 +59,10 @@ int main()
         case '5':
         {
             // view deleted history
-            Product P; // object of product
+            Item *P = new Product();
 
-            P.viewDelItem(); // to view all the deleted items
+            P->viewDelItem(); // to view all the deleted items
+            delete P;
             break;
         }
         case '6':
