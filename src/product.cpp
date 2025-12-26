@@ -19,6 +19,8 @@ Product::Product(std::string itemName, int id, double price, int quantity, std::
     _description[sizeof(_description) - 1] = '\0';
 }
 
+Product::~Product() {} // Virtual destructor
+
 // Function to generate unique ID for the product
 // Implementation can be added as per requirements
 int Product::genetateId()

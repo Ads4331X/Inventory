@@ -12,7 +12,7 @@ private:
     std::string getTruncatedDesc(int width) const;
 
 public:
-    Product(std::string itemName = "", int id = 0, double price = 0, int quantity = 0, std::string description = "");
+    Product(std::string itemName = "", int id = 0, double price = 0, int quantity = 0, std::string description = ""); // constructor
     void addItem() override;
     int genetateId();
     void editItem(int editId) override;
@@ -20,6 +20,7 @@ public:
     void viewInv() override;
     void display() override;
     void viewDelItem() override;
+    virtual ~Product() {} // Virtual destructor
 };
 
 #endif

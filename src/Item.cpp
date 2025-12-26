@@ -2,7 +2,7 @@
 #include "../include/config.h"
 #include "TimeUtils.h"
 
-/*Constructor: Initializes Item with name and ID, sets current date/time
+/*Constructor to initializes Item with name and ID, sets current date/time
  Parameters: itemName - name of the item, id - unique identifier */
 Item::Item(std::string itemName, int id)
 {
@@ -14,6 +14,8 @@ Item::Item(std::string itemName, int id)
     strncpy(_addedDateTime, getCurrentDateTime().c_str(), sizeof(_addedDateTime));
     _addedDateTime[sizeof(_addedDateTime) - 1] = '\0';
 }
+
+Item::~Item() {}; // Virtual destructor
 
 /* function to add item to inventory file
  Note: This is overridden in derived classes

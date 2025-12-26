@@ -20,21 +20,27 @@ int main()
         {
         case '1':
         {
+            // We instantiate a derived 'Product' object through a base 'Item' pointer.
+            // This allows the program to call the correct 'addItem' implementation at runtime.
             Item *p = new Product();
 
             p->addItem();
-            delete p;
+            delete p; // Manual memory management to prevent memory leaks
             break;
         }
         case '2':
-        { // Edit item logic
-            std::cout << "Enter the item ID to edit: ";
+        {
+            // Edit item logic
+            // Identifies a specific record in the binary file by its unique ID
+            // and allows modification of attributes without affecting other records.
+            std::cout
+                << "Enter the item ID to edit: ";
             std::cin >> id; // gets the id to edit from the user
 
             Item *P = new Product();
 
             P->editItem(id); // edits the data from the inventory which id is same as the one given by user
-            delete P;
+            delete P;        // Manual memory management to prevent memory leaks
             break;
         }
         case '3':
@@ -45,7 +51,7 @@ int main()
             Item *P = new Product();
 
             P->deleteItem(id); // deletes the data from the inventory which id is same as the one given by user
-            delete P;
+            delete P;          // Manual memory management to prevent memory leaks
             break;
         }
         case '4':
@@ -53,7 +59,7 @@ int main()
             Item *p = new Product(); // object of product
 
             p->viewInv(); // view all the data of inventory
-            delete p;
+            delete p;     // Manual memory management to prevent memory leaks
             break;
         }
         case '5':
@@ -62,14 +68,15 @@ int main()
             Item *P = new Product();
 
             P->viewDelItem(); // to view all the deleted items
-            delete P;
+            delete P;         // Manual memory management to prevent memory leaks
             break;
         }
         case '6':
             // Exit logic
+            // Provides feedback to the user and pauses the execution
             std::cout << std::endl;
             std::cout << "Exiting program..." << std::endl; // display exiting program when exiting the program
-            crossSleep(2000);
+            crossSleep(2000);                               // pause for 2 seconds
             break;
 
         default:
