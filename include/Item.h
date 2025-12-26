@@ -17,10 +17,10 @@ protected:
 
 public:
     Item(std::string itemName = "", int id = 0);
-    void addItem();
+    virtual void addItem() = 0;
     void editItem(int editId);
     void deleteItem(int deleteId);
-    void display();
+    virtual void display();
     void delItem();
     virtual void viewInv() = 0;
 };

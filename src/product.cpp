@@ -267,3 +267,12 @@ void Product::viewDelItem()
     std::cin.get();                                                     // pause the program
     std::cout << std::endl;
 }
+
+/* function to display the data of item that user has just entered*/
+void Product::display()
+{
+    std::cout << "ID: " << _id
+              << " | Name: " << _itemName
+              << " | Price: $" << _price
+              << " | Qty: " << _quantity << std::endl;
+}

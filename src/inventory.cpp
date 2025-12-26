@@ -20,9 +20,10 @@ int main()
         {
         case '1':
         {
-            Product P; // object of product
+            Item *p = new Product();
 
-            P.addItem();
+            p->addItem();
+            delete p;
             break;
         }
         case '2':
@@ -46,10 +47,11 @@ int main()
             break;
         }
         case '4':
-        {              // View items logic
-            Product P; // object of product
+        {                            // View items logic
+            Item *p = new Product(); // object of product
 
-            P.viewInv(); // view all the data of inventory
+            p->viewInv(); // view all the data of inventory
+            delete p;
             break;
         }
         case '5':
