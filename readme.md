@@ -15,11 +15,14 @@ A C++ console-based inventory management system that allows users to manage prod
 
 ## How to Compile
 
-[Add your compilation command here]
+just run it by clicking run and debug
 
 ## How to Run
 
-run inventory.cpp
+Ensure you have proper C++ compiler installed.
+Compile all C++ files in sec folder.
+Run the resulting executable.
+Note: the file location must be same (the data folder must be in root directory for storing data in file)
 
 ## File Structure
 
