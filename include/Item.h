@@ -20,9 +20,9 @@ public:
     void addItem();
     void editItem(int editId);
     void deleteItem(int deleteId);
-    void viewInv();
+    void display();
     void delItem();
-    virtual void display() = 0;
+    virtual void viewInv() = 0;
 };
 
 #endif

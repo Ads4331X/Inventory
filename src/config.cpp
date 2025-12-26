@@ -1,4 +1,4 @@
-#include "config.h"
+#include "../include/config.h"
 
 std::fstream invFile;     // for inventory file
 std::fstream tempFile;    // for temp file used for deleting or editing the data in inventory file

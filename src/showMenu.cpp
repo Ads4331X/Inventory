@@ -1,14 +1,8 @@
 #include "showMenu.h"
-
+#include "../include/sleep.h"
 #include <iostream>
 
-#ifdef _WIN32
-#include <windows.h> // for Sleep()
-#else
-#include <unistd.h> // for sleep()
-#endif
-
-char ShowMenu()
+char showMenu()
 {
     // Clear the console
 #ifdef _WIN32
@@ -43,14 +37,11 @@ char validateChoice(char choice)
 
     else
     {
+        std::cout << std::endl;
         std::cout << "Invalid choice. Please try again." << std::endl; // Invalid choice handling
 
         // Pause for 2 seconds
-#ifdef _WIN32
-        Sleep(2000); // sleep for Windows;
-#else
-        sleep(2); // sleep for linux and macOS
-#endif
+        crossSleep(2000);
     }
     return '\0'; // Return null character for invalid choice
 }

@@ -1,5 +1,7 @@
 #include <iostream>
-#include "product.h"
+#include "../include/product.h"
+#include "../include/config.h"
+#include "../include/sleep.h"
 #include "showMenu.h"
 
 int main()
@@ -58,9 +60,11 @@ int main()
             P.viewDelItem(); // to view all the deleted items
             break;
         }
-
         case '6':
+            // Exit logic
+            std::cout << std::endl;
             std::cout << "Exiting program..." << std::endl; // display exiting program when exiting the program
+            crossSleep(2000);
             break;
 
         default:

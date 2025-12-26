@@ -1,10 +1,10 @@
-#include "Item.h"
-#include "config.h"
+#include "../include/Item.h"
+#include "../include/config.h"
 #include "TimeUtils.h"
 
 /*Constructor: Initializes Item with name and ID, sets current date/time
  Parameters: itemName - name of the item, id - unique identifier */
-Item::Item(std::string itemName = "", int id = 0)
+Item::Item(std::string itemName, int id)
 {
     strncpy(_itemName, itemName.c_str(), sizeof(_itemName)); // copy the item name
     _itemName[sizeof(_itemName) - 1] = '\0';                 // ensure null-terminated
