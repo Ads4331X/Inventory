@@ -24,6 +24,7 @@ public:
     virtual void viewDelItem();
     virtual void viewInv() = 0;
     virtual ~Item() {} // Virtual destructor
+    virtual void searchItem(std::string name) = 0;
 };
 
 #endif

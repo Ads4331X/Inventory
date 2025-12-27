@@ -15,8 +15,6 @@ Item::Item(std::string itemName, int id)
     _addedDateTime[sizeof(_addedDateTime) - 1] = '\0';
 }
 
-Item::~Item() {}; // Virtual destructor
-
 /* function to add item to inventory file
  Note: This is overridden in derived classes
 */
@@ -132,6 +130,7 @@ void Item::viewInv()
 /* function to view the data of the deleted items
 it displays the data stored in history file which stores all the deleted item information*/
 void Item::viewDelItem()
+
 {
     historyFile.open(historyFilename, std::ios::in | std::ios::binary); // opens history file in reading in binary mode
     if (!historyFile)                                                   // checks if history file exists
@@ -144,4 +143,32 @@ void Item::viewDelItem()
         display(); // to display the history
     }
     historyFile.close(); // close the history file
+}
+
+/* function to search an item from the inventory which takes name as parameter and checks if the name is equal to name given by user*/
+// Note: This is a pure virtual function and must be implemented in derived classes
+void Item::searchItem(std::string name)
+{
+    // Pure virtual function - must be implemented in derived classes
+    invFile.open(inventoryFilename, std::ios::in | std::ios::binary); // Open inventory file in reading in binary mode
+    if (!invFile)                                                     // checks if inventory file exists
+    {
+        std::cerr << "Error opening file for searching item!" << std::endl; // displays error
+        return;
+    }
+    bool found = false;                                 // flag to check if item is found
+    while (invFile.read((char *)&*this, sizeof(*this))) // reads inventory file
+    {
+        if (std::string(_itemName) == name) // checks if the name is equal to name given by user
+        {
+            display();    // display the item
+            found = true; // set found flag to true
+            break;        // break the loop
+        }
+    }
+    invFile.close(); // close the inventory file
+    if (!found)      // if item is not found
+    {
+        std::cout << "Item not found!" << std::endl; // display item not found message
+    }
 }

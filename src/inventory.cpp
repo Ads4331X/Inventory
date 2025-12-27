@@ -72,6 +72,17 @@ int main()
             break;
         }
         case '6':
+        {
+            std::cout << "\nEnter the item name to search: ";
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear menu newline
+            std::getline(std::cin, itemName);
+
+            Item *P = new Product();
+            P->searchItem(itemName);
+            delete P;
+            break;
+        }
+        case '7':
             // Exit logic
             // Provides feedback to the user and pauses the execution
             std::cout << std::endl;
@@ -85,6 +96,6 @@ int main()
             continue;
         }
 
-    } while (choice != '6'); // loops till user choice does not equal to 6
+    } while (choice != '7'); // loops till user choice does not equal to 6
     return 0;
 }

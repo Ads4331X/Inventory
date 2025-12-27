@@ -20,6 +20,7 @@ public:
     void viewInv() override;
     void display() override;
     void viewDelItem() override;
+    void searchItem(std::string name) override;
     virtual ~Product() {} // Virtual destructor
 };
 

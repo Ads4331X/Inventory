@@ -19,8 +19,6 @@ Product::Product(std::string itemName, int id, double price, int quantity, std::
     _description[sizeof(_description) - 1] = '\0';
 }
 
-Product::~Product() {} // Virtual destructor
-
 // Function to generate unique ID for the product
 // Implementation can be added as per requirements
 int Product::genetateId()
@@ -273,8 +271,60 @@ void Product::viewDelItem()
 /* function to display the data of item that user has just entered*/
 void Product::display()
 {
-    std::cout << "ID: " << _id
-              << " | Name: " << _itemName
-              << " | Price: $" << _price
-              << " | Qty: " << _quantity << std::endl;
+    std::cout << "------------------------------------------------------------------------------------" << std::endl
+              << " | Item Id: " << _id << std::endl
+              << " | Item Name: " << _itemName << std::endl
+              << " | Price: $" << _price << std::endl
+              << " | Qty: " << _quantity << std::endl
+              << " | Added Date: " << _addedDateTime << std::endl
+              << " | Description: " << _description << std::endl
+              << "------------------------------------------------------------------------------------" << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Press Enter to Continue...";
+
+    // Clear buffer ONLY if there is data left in it
+    if (std::cin.get() != '\n')
+    {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+}
+
+/* function to search a product */
+void Product::searchItem(std::string name)
+{
+    invFile.open(inventoryFilename, std::ios::in | std::ios::binary); // open inventory file in reading in binary mode
+    if (!invFile)                                                     // checks if inventory file exists
+    {
+        std::cerr << "Error opening file for searching item!" << std::endl; // display error message
+        return;
+    }
+    Product temp; // a temporary product object
+
+    bool found = false;                                  // flag to check if item is found
+    while (invFile.read((char *)&temp, sizeof(Product))) // read the inventory file
+    {
+        if (std::string(temp._itemName).find(name) != std::string::npos) // check if item name contains the search string
+        {
+            temp.display(); // display the product details
+            found = true;
+        }
+    }
+
+    if (!found)
+    {
+
+        std::cout << "\n----------------------------------------------------------------------------" << std::endl;
+        std::cout << "\n No items found matching the name: " << name << std::endl; // display message if no items found
+        std::cout << "\n----------------------------------------------------------------------------" << std::endl;
+
+        std::cout << "\n Press Enter to continue...";
+        // Clear buffer ONLY if there is data left in it
+        if (std::cin.get() != '\n')
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
+
+    invFile.close(); // close the inventory file
 }
