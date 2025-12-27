@@ -20,7 +20,7 @@ public:
     void viewInv() override;
     void display() override;
     void viewDelItem() override;
-    void searchItem(std::string name) override;
+    void searchItem() override;
     double genetateReport() override;
     bool checkFileEmpty(std::fstream &file); // check if file is empty
     virtual ~Product() {}                    // Virtual destructor

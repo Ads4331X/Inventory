@@ -356,46 +356,53 @@ void Product::display()
 }
 
 /* function to search a product */
-void Product::searchItem(std::string name)
+/* function to search a product */
+void Product::searchItem()
 {
+    // Check if the previous input left a newline in the buffer
+    if (std::cin.peek() == '\n')
+    {
+        std::cin.ignore();
+    }
+
     invFile.open(inventoryFilename, std::ios::in | std::ios::binary); // open inventory file in reading in binary mode
     if (!invFile || checkFileEmpty(invFile))                          // checks if inventory file exists or is empty
     {
         std::cout << "\n[!] Inventory is currently empty. No items to search." << std::endl;
         if (invFile.is_open())
             invFile.close();
-
         std::cout << "\nPress Enter to return to menu...";
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin.get();
         return;
     }
 
-    Product temp;       // temporary product object
-    bool found = false; // flag to check if item is found
+    std::string name; // variable to store the name to search
+    std::cout << "\nEnter the item name to search: ";
+    std::getline(std::cin, name); // get the item name from user
 
-    std::cout << "\n--- Searching for: " << name << " ---" << std::endl;
+    Product temp;
+    bool found = false;
+
+    std::cout << "\n--- Searching for: \" " << name << " \" ---" << std::endl;
 
     while (invFile.read((char *)&temp, sizeof(Product))) // read the inventory file
     {
-        // Check if search term exists in the item name
-        if (std::string(temp._itemName).find(name) != std::string::npos)
+        if (std::string(temp._itemName).find(name) != std::string::npos) // check if item name contains the search string
         {
-            temp.display(); // Call display
-            found = true;
+            temp.display(); // display the product details
+            found = true;   // set found flag to true
         }
     }
 
-    if (!found)
+    if (!found) // if no matching items found
     {
-        std::cout << "\n[!] No results found for \"" << name << "\"" << std::endl;
+        std::cout << "\n[!] No results found for \"" << name << "\"" << std::endl; // display not found message
     }
 
-    invFile.close();
+    invFile.close(); // close the inventory file
     std::cout << "\nPress Enter to continue...";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.get();
 }
-
 /* function to generate report (total sale) */
 double Product::genetateReport()
 {

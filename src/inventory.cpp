@@ -51,6 +51,7 @@ int main()
             Item *P = new Product();
 
             P->deleteItem(id); // deletes the data from the inventory which id is same as the one given by user
+            delete P;          // Manual memory management to prevent memory leaks
             break;
         }
         case '4':
@@ -72,17 +73,15 @@ int main()
         }
         case '6':
         {
-            std::cout << "\nEnter the item name to search: ";
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear menu newline
-            std::getline(std::cin, itemName);
 
             Item *P = new Product();
-            P->searchItem(itemName);
+            P->searchItem();
             delete P;
             break;
         }
         case '7':
         {
+            // Generate report logic
             Item *P = new Product();
             P->genetateReport();
             delete P;

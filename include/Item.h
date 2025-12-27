@@ -29,7 +29,7 @@ public:
     virtual void viewDelItem() = 0;
     virtual void viewInv() = 0;
     virtual ~Item() {} // Virtual destructor
-    virtual void searchItem(std::string name) = 0;
+    virtual void searchItem() = 0;
     virtual bool checkFileEmpty(std::fstream &file) = 0;
     virtual int genetateId() = 0;
     virtual double genetateReport() = 0;
