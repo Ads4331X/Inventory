@@ -51,7 +51,6 @@ int main()
             Item *P = new Product();
 
             P->deleteItem(id); // deletes the data from the inventory which id is same as the one given by user
-            delete P;          // Manual memory management to prevent memory leaks
             break;
         }
         case '4':
@@ -83,6 +82,13 @@ int main()
             break;
         }
         case '7':
+        {
+            Item *P = new Product();
+            P->genetateReport();
+            delete P;
+            break;
+        }
+        case '8':
             // Exit logic
             // Provides feedback to the user and pauses the execution
             std::cout << std::endl;
@@ -96,6 +102,6 @@ int main()
             continue;
         }
 
-    } while (choice != '7'); // loops till user choice does not equal to 6
+    } while (choice != '8'); // loops till user choice does not equal to 6
     return 0;
 }

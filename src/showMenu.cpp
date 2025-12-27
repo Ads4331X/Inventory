@@ -22,7 +22,8 @@ char showMenu()
     std::cout << "4. View Items" << std::endl;
     std::cout << "5. View Deleted History" << std::endl;
     std::cout << "6. Search Item" << std::endl;
-    std::cout << "7. Exit" << std::endl;
+    std::cout << "7. Generate Report" << std::endl;
+    std::cout << "8. Exit" << std::endl;
     std::cout << "------------------------------" << std::endl;
 
     std::cout << "Enter your choice: ";
@@ -33,7 +34,7 @@ char showMenu()
 /* function to check if the choice that user has given is valid or nor*/
 char validateChoice(char choice)
 {
-    if (choice >= '1' && choice <= '7') // checks if choise lies within 1 to 6
+    if (choice >= '1' && choice <= '8') // checks if choise lies within 1 to 6
         return choice;                  // return the choice
 
     else
