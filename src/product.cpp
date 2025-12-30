@@ -193,8 +193,6 @@ void Product::editItem(int editId)
             std::string newDesc = validateDescription(100, 1);                      // validate new description
             strncpy(temp._description, newDesc.c_str(), sizeof(temp._description)); // copy new description to _description
             temp._description[sizeof(temp._description) - 1] = '\0';                // ensure null-terminated
-            strncpy(temp._itemName, newName.c_str(), 49);                           // copy new name to item name
-            temp._itemName[49] = '\0';                                              // ensure null-terminated
         }
         tempFile.write((char *)&temp, sizeof(Product)); // writes the product object in binary mode
     }
