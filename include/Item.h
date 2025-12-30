@@ -31,8 +31,8 @@ public:
     virtual ~Item() {} // Virtual destructor
     virtual void searchItem() = 0;
     virtual bool checkFileEmpty(std::fstream &file) = 0;
-    virtual int genetateId() = 0;
-    virtual double genetateReport() = 0;
+    virtual int generateId() = 0;
+    virtual double generateReport() = 0;
 };
 
 #endif

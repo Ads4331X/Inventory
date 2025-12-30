@@ -7,6 +7,11 @@
 #include <iomanip>
 #include <fstream>
 
+const int maxNameLength = 49;
+const int minNameLength = 1;
+const int maxDescLength = 100;
+const int minDescLength = 1;
+
 /*Constructor: Initializes Product with name, ID, price, quantity, and description
  Parameters: itemName - name of the item, id - unique identifier, price - price of the product,
  quantity - available quantity, description - description of the product */
@@ -77,7 +82,7 @@ int Product::validatePrice()
     return _price;
 }
 
-std::string Product::validateName(int maxLen = 49, int minLen = 1)
+std::string Product::validateName(int maxLen, int minLen)
 {
     std::string name;
     std::getline(std::cin >> std::ws, name);
@@ -94,7 +99,7 @@ std::string Product::validateName(int maxLen = 49, int minLen = 1)
     return name;
 }
 
-std::string Product::validateDescription(int maxLen = 100, int minLen = 1)
+std::string Product::validateDescription(int maxLen, int minLen)
 {
     std::string description;
     std::getline(std::cin >> std::ws, description);
@@ -182,17 +187,17 @@ void Product::editItem(int editId)
             found = true; // set found flag to true
 
             std::cout << "Enter new name: ";
-            std::string newName = validateName(49, 1); // validate new name
-            strcpy(temp._itemName, newName.c_str());   // copy new name to item name
-            temp._itemName[49] = '\0';                 // ensure null-terminated
+            std::string newName = validateName(maxNameLength, minNameLength); // validate new name
+            strcpy(temp._itemName, newName.c_str());                          // copy new name to item name
+            temp._itemName[49] = '\0';                                        // ensure null-terminated
             std::cout << "Enter new price: ";
             temp._price = validatePrice(); // get new price from user by validating it
             std::cout << "Enter new quantity: ";
             temp._quantity = validateQuantity(); // get new quantity from user by validating it
             std::cout << "Enter new description: ";
-            std::string newDesc = validateDescription(100, 1);                      // validate new description
-            strncpy(temp._description, newDesc.c_str(), sizeof(temp._description)); // copy new description to _description
-            temp._description[sizeof(temp._description) - 1] = '\0';                // ensure null-terminated
+            std::string newDesc = validateDescription(maxDescLength, minDescLength); // validate new description
+            strncpy(temp._description, newDesc.c_str(), sizeof(temp._description));  // copy new description to _description
+            temp._description[sizeof(temp._description) - 1] = '\0';                 // ensure null-terminated
         }
         tempFile.write((char *)&temp, sizeof(Product)); // writes the product object in binary mode
     }
