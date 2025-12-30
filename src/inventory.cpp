@@ -92,7 +92,7 @@ int main()
         {
             // Generate report logic
             Item *P = new Product();
-            P->genetateReport();
+            P->generateReport();
             delete P;
             break;
         }

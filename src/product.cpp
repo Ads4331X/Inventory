@@ -128,7 +128,7 @@ void Product::addItem()
     std::string name = validateName(49, 1);              // get the name of item from user by validating it
     strncpy(_itemName, name.c_str(), sizeof(_itemName)); // copy name to _itemName
     _itemName[sizeof(_itemName) - 1] = '\0';             // ensure null-terminated
-    _id = genetateId();                                  // generates id for the product
+    _id = generateId();                                  // generates id for the product
     std::cout << "Enter item price: ";
     _price = validatePrice(); // get the price of item from user by validating it
     std::cout << "Enter item quantity: ";
