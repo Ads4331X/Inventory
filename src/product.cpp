@@ -21,7 +21,7 @@ Product::Product(std::string itemName, int id, double price, int quantity, std::
 
 // Function to generate unique ID for the product
 // Implementation can be added as per requirements
-int Product::genetateId()
+int Product::generateId()
 {
     // Implementation for generating unique ID can be added here
     invFile.open(inventoryFilename, std::ios::in | std::ios::binary); // open inventory file in reading in binary mode
@@ -468,7 +468,7 @@ void Product::searchItem()
     std::cin.get();
 }
 /* function to generate report (total sale) */
-double Product::genetateReport()
+double Product::generateReport()
 {
     invFile.open(inventoryFilename, std::ios::in | std::ios::binary); // open inventory file in reading in binary mode
 

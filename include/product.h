@@ -20,14 +20,14 @@ private:
 public:
     Product(std::string itemName = "", int id = 0, double price = 0, int quantity = 0, std::string description = ""); // constructor
     void addItem() override;
-    int genetateId();
+    int generateId();
     void editItem(int editId) override;
     void deleteItem(int deleteId) override;
     void viewInv() override;
     void display() override;
     void viewDelItem() override;
     void searchItem() override;
-    double genetateReport() override;
+    double generateReport() override;
     bool checkFileEmpty(std::fstream &file); // check if file is empty
     virtual ~Product() {}                    // Virtual destructor
 };
