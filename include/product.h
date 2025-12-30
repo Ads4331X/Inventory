@@ -11,6 +11,12 @@ private:
     char _description[100];
     std::string getTruncatedDesc(int width) const;
 
+    // Validation helper functions
+    int validateQuantity();
+    int validatePrice();
+    std::string validateName(int maxLen, int minLen);
+    std::string validateDescription(int maxLen, int minLen);
+
 public:
     Product(std::string itemName = "", int id = 0, double price = 0, int quantity = 0, std::string description = ""); // constructor
     void addItem() override;

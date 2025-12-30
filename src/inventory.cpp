@@ -33,9 +33,13 @@ int main()
             // Edit item logic
             // Identifies a specific record in the binary file by its unique ID
             // and allows modification of attributes without affecting other records.
-            std::cout
-                << "Enter the item ID to edit: ";
-            std::cin >> id; // gets the id to edit from the user
+            std::cout << "Enter the item ID to edit: ";
+            while (!(std::cin >> id))
+            {
+                std::cout << "[!] Invalid input. Please enter a numeric ID: ";
+                std::cin.clear();            // Fix the "stuck" state
+                std::cin.ignore(1000, '\n'); // Clear the 'abc' out of the buffer
+            }
 
             Item *P = new Product();
 
@@ -46,7 +50,12 @@ int main()
         case '3':
         { // Delete item logic
             std::cout << "Enter the item ID to delete: ";
-            std::cin >> id; // gets the id to delete from the user
+            while (!(std::cin >> id)) // Validate input
+            {
+                std::cout << "[!] Invalid input. Please enter a numeric ID: ";
+                std::cin.clear();
+                std::cin.ignore(1000, '\n');
+            }
 
             Item *P = new Product();
 

@@ -7,10 +7,13 @@ A C++ console-based inventory management system that allows users to manage prod
 ## Features
 
 - Add new products with details (name, ID, price, quantity, description)
+- Auto-generate unique product IDs
 - Edit existing products
 - Delete products (moved to history)
 - View all inventory items in table format
 - View deleted items history
+- Search products by name
+- Generate inventory valuation report
 - Data persistence using binary files
 
 ## How to Compile

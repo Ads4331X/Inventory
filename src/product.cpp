@@ -52,6 +52,65 @@ int Product::genetateId()
     return maxId + 1;
 }
 
+/* Validation helper functions */
+int Product::validateQuantity()
+{
+    while (!(std::cin >> _quantity) || _quantity < 0)
+    {
+        std::cout << "[!] Invalid input. Please enter a numeric quantity: ";
+        std::cin.clear();            // Fix the "stuck" state
+        std::cin.ignore(1000, '\n'); // Clear invalid input out of the buffer
+    }
+    std::cin.ignore(1000, '\n'); // Clear the newline character from the buffer
+    return _quantity;
+}
+
+int Product::validatePrice()
+{
+    while (!(std::cin >> _price) || _price < 0)
+    {
+        std::cout << "[!] Invalid input. Please enter a numeric price: ";
+        std::cin.clear();            // Fix the "stuck" state
+        std::cin.ignore(1000, '\n'); // Clear invalid input out of the buffer
+    }
+    std::cin.ignore(1000, '\n'); // Clear the newline character from the buffer
+    return _price;
+}
+
+std::string Product::validateName(int maxLen = 49, int minLen = 1)
+{
+    std::string name;
+    std::getline(std::cin >> std::ws, name);
+    while (name.empty() || name.length() > maxLen || name.length() < minLen)
+    {
+        if (name.length() > maxLen)
+            std::cout << "[!] Name too long. Please enter a name up to " << maxLen << " characters: ";
+        else if (name.length() < minLen)
+            std::cout << "[!] Name too short. Please enter a name with at least " << minLen << " characters: ";
+        else
+            std::cout << "[!] Name cannot be empty. Please enter a valid name: ";
+        std::getline(std::cin, name);
+    }
+    return name;
+}
+
+std::string Product::validateDescription(int maxLen = 100, int minLen = 1)
+{
+    std::string description;
+    std::getline(std::cin >> std::ws, description);
+    while (description.length() > maxLen || description.length() < minLen || description.empty())
+    {
+        if (description.length() > maxLen)
+            std::cout << "[!] Description too long. Please enter a description up to " << maxLen << " characters: ";
+        else if (description.length() < minLen)
+            std::cout << "[!] Description too short. Please enter a description with at least " << minLen << " characters: ";
+        else
+            std::cout << "[!] Description cannot be empty. Please enter a valid description: ";
+        std::getline(std::cin, description);
+    }
+    return description;
+}
+
 /*function to add items to the inventory
 which gets user input and stores the product data in a binary file */
 void Product::addItem()
@@ -61,15 +120,18 @@ void Product::addItem()
     std::cout << "Enter item details:" << std::endl;
     std::cout << "-----------------------------------------------------------------------------" << std::endl;
     std::cout << "Enter item name: ";
-    std::cin.getline(_itemName, 50); // get user input of item name
-    _id = genetateId();              // generates id for the product
+    std::string name = validateName(49, 1);              // get the name of item from user by validating it
+    strncpy(_itemName, name.c_str(), sizeof(_itemName)); // copy name to _itemName
+    _itemName[sizeof(_itemName) - 1] = '\0';             // ensure null-terminated
+    _id = genetateId();                                  // generates id for the product
     std::cout << "Enter item price: ";
-    std::cin >> _price; // get the price of item from user
+    _price = validatePrice(); // get the price of item from user by validating it
     std::cout << "Enter item quantity: ";
-    std::cin >> _quantity; // get the quantity of the item
+    _quantity = validateQuantity(); // get the quantity of the item by validating it
     std::cout << "Enter item description: ";
-    std::cin.ignore();
-    std::cin.getline(_description, 100); // get the description of the item
+    std::string desc = validateDescription(100, 1);            // validate description
+    strncpy(_description, desc.c_str(), sizeof(_description)); // copy description to _description
+    _description[sizeof(_description) - 1] = '\0';             // ensure null-terminated
     std::cout << "-----------------------------------------------------------------------------" << std::endl;
     strncpy(_addedDateTime, getCurrentDateTime().c_str(), sizeof(_addedDateTime));
     _addedDateTime[sizeof(_addedDateTime) - 1] = '\0';
@@ -118,18 +180,21 @@ void Product::editItem(int editId)
         if (temp._id == editId) // checks if product id is equal to the id given by user
         {
             found = true; // set found flag to true
-            std::string newName;
+
             std::cout << "Enter new name: ";
-            std::getline(std::cin >> std::ws, newName); // get new name from user
+            std::string newName = validateName(49, 1); // validate new name
+            strcpy(temp._itemName, newName.c_str());   // copy new name to item name
+            temp._itemName[49] = '\0';                 // ensure null-terminated
             std::cout << "Enter new price: ";
-            std::cin >> temp._price; // get new price from user
+            temp._price = validatePrice(); // get new price from user by validating it
             std::cout << "Enter new quantity: ";
-            std::cin >> temp._quantity; // get new quantity from user
+            temp._quantity = validateQuantity(); // get new quantity from user by validating it
             std::cout << "Enter new description: ";
-            std::cin.ignore();                            // clear input buffer
-            std::cin.getline(temp._description, 100);     // get new description from user
-            strncpy(temp._itemName, newName.c_str(), 49); // copy new name to item name
-            temp._itemName[49] = '\0';                    // ensure null-terminated
+            std::string newDesc = validateDescription(100, 1);                      // validate new description
+            strncpy(temp._description, newDesc.c_str(), sizeof(temp._description)); // copy new description to _description
+            temp._description[sizeof(temp._description) - 1] = '\0';                // ensure null-terminated
+            strncpy(temp._itemName, newName.c_str(), 49);                           // copy new name to item name
+            temp._itemName[49] = '\0';                                              // ensure null-terminated
         }
         tempFile.write((char *)&temp, sizeof(Product)); // writes the product object in binary mode
     }
@@ -143,16 +208,17 @@ void Product::editItem(int editId)
         remove(inventoryFilename.c_str());                                // remove old file
         rename(tempInventoryFilename.c_str(), inventoryFilename.c_str()); // rename files
         std::cout << "\n[✓] Product updated successfully!\n\n";           // display success message
+        std::cout << "Press Enter to continue...";
+        std::cin.get();
     }
     else
     {
         remove(tempInventoryFilename.c_str());                           // remove temp file if no changes made
         std::cout << "\n[!] Product ID " << editId << " not found.\n\n"; // display not found message
+        std::cout << "Press Enter to continue...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.get();
     }
-
-    std::cout << "Press Enter to continue...";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cin.get();
 }
 
 /* function to delete an item from the inventory
@@ -378,7 +444,7 @@ void Product::searchItem()
 
     std::string name; // variable to store the name to search
     std::cout << "\nEnter the item name to search: ";
-    std::getline(std::cin, name); // get the item name from user
+    name = validateName(49, 1); // validate and get the name to search from user
 
     Product temp;
     bool found = false;
