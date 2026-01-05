@@ -125,18 +125,18 @@ void Product::addItem()
     std::cout << "Enter item details:" << std::endl;
     std::cout << "-----------------------------------------------------------------------------" << std::endl;
     std::cout << "Enter item name: ";
-    std::string name = validateName(49, 1);              // get the name of item from user by validating it
-    strncpy(_itemName, name.c_str(), sizeof(_itemName)); // copy name to _itemName
-    _itemName[sizeof(_itemName) - 1] = '\0';             // ensure null-terminated
-    _id = generateId();                                  // generates id for the product
+    std::string name = validateName(maxNameLength, minNameLength); // get the name of item from user by validating it
+    strncpy(_itemName, name.c_str(), sizeof(_itemName));           // copy name to _itemName
+    _itemName[sizeof(_itemName) - 1] = '\0';                       // ensure null-terminated
+    _id = generateId();                                            // generates id for the product
     std::cout << "Enter item price: ";
     _price = validatePrice(); // get the price of item from user by validating it
     std::cout << "Enter item quantity: ";
     _quantity = validateQuantity(); // get the quantity of the item by validating it
     std::cout << "Enter item description: ";
-    std::string desc = validateDescription(100, 1);            // validate description
-    strncpy(_description, desc.c_str(), sizeof(_description)); // copy description to _description
-    _description[sizeof(_description) - 1] = '\0';             // ensure null-terminated
+    std::string desc = validateDescription(maxDescLength, minDescLength); // validate description
+    strncpy(_description, desc.c_str(), sizeof(_description));            // copy description to _description
+    _description[sizeof(_description) - 1] = '\0';                        // ensure null-terminated
     std::cout << "-----------------------------------------------------------------------------" << std::endl;
     strncpy(_addedDateTime, getCurrentDateTime().c_str(), sizeof(_addedDateTime));
     _addedDateTime[sizeof(_addedDateTime) - 1] = '\0';

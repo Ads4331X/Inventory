@@ -1,0 +1,22 @@
+graph TD
+    A[Start Program] --> B[Initialize Variables]
+    B --> C{"Do-While Loop\nchoice != '8'"}
+
+    C --> D["Call showMenu()\n- Clear Screen\n- Display Menu 1-8\n- Get & Validate Choice"]
+
+    D --> E{"Valid Choice?"}
+    E -->|No| F["Display Invalid choice\nSleep 2 seconds"] --> D
+    E -->|Yes| G{"Switch on Choice"}
+
+    G -->|1| Add["Item* p = new Product()\np->addItem()\ndelete p"] --> D
+    G -->|2| Edit["Input & Validate ID\nItem* p = new Product()\np->editItem(ID)\ndelete p"] --> D
+    G -->|3| Delete["Input & Validate ID\nItem* p = new Product()\np->deleteItem(ID)\ndelete p"] --> D
+    G -->|4| ViewInv["Item* p = new Product()\np->viewInv()\ndelete p"] --> D
+    G -->|5| ViewHist["Item* p = new Product()\np->viewDelItem()\ndelete p"] --> D
+    G -->|6| Search["Item* p = new Product()\np->searchItem()\ndelete p"] --> D
+    G -->|7| Report["Item* p = new Product()\np->generateReport()\ndelete p"] --> D
+    G -->|8| Exit["Display Exiting program...\nSleep 2 seconds"] --> End[End Program]
+
+    style A fill:#90EE90,stroke:#333
+    style End fill:#FFB6C6,stroke:#333
+    style F fill:#FFB6C6,stroke:#333
